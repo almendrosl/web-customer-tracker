@@ -3,7 +3,6 @@ package com.luv2code.springdemo.dao;
 import com.luv2code.springdemo.entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.TypeHelper;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,9 +21,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 
         Session currentSession = sessionFactory.getCurrentSession();
 
-        Query<Customer> theQuery =
-                currentSession.createQuery("from Customer order by lastName",
-                        Customer.class);
+        Query<Customer> theQuery = currentSession.createQuery("select c from Customer c order by c.lastName",
+                Customer.class);
 
         List<Customer> customers = theQuery.getResultList();
 
